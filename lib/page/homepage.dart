@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/model/loginModel.dart';
 import 'package:flutter_application_2/page/Settings.dart';
 import 'package:flutter_application_2/page/leaderboard.dart';
 import 'package:flutter_application_2/page/learning.dart';
@@ -6,18 +7,18 @@ import 'package:flutter_application_2/page/quiz.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 class HomePage extends StatefulWidget {
-  final String? uid;
-  HomePage({Key? key, @required this.uid}) : super(key: key);
+  final UserDetail? userDetail;
+  HomePage({Key? key, @required this.userDetail}) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState(uid);
+  _HomePageState createState() => _HomePageState(userDetail);
 }
 
 PersistentTabController _controller = PersistentTabController(initialIndex: 0);
 
 class _HomePageState extends State<HomePage> {
-  final String? uid;
-  _HomePageState(this.uid);
+  final UserDetail? userDetail;
+  _HomePageState(this.userDetail);
   List<Widget> _buildScreens() {
     return [
       Learning(),

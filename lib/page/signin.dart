@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_2/controller/authentication.dart';
 import 'package:flutter_application_2/page/homepage.dart';
+import 'package:flutter_application_2/page/learning.dart';
 import 'package:flutter_application_2/services/api_manager.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -24,17 +25,19 @@ class _signinState extends State<signin> {
   String email = "";
   String password = "";
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  var userDetail;
+
   void signin() {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
       signIn(email, password).then((value) {
-        if (value != null) {
-          Navigator.of(context).pushReplacement(
-            MaterialPageRoute(
-              builder: (context) => HomePage(uid: value.uid),
-            ),
-          );
-        }
+        // if (value != null) {
+        //   Navigator.of(context).pushReplacement(
+        //     MaterialPageRoute(
+        //       builder: (context) => HomePage(uid: value.uid),
+        //     ),
+        //   );
+        // }
       });
     }
   }
@@ -233,9 +236,18 @@ class _signinState extends State<signin> {
                                 // Navigator.of(context).push(MaterialPageRoute(
                                 //     builder: (context) => HomePage()));
 
-                                APIManager().login(email, password).then(
-                                    (value) =>
-                                        print(value.userDetails[0].username));
+                                APIManager()
+                                    .login(email, password)
+                                    .then((value) {
+                                  userDetail = value.userDetails[0];
+                                  print(userDetail.runtimeType);
+                                  if (value.status == 1) {
+                                    Navigator.of(context).pushReplacement(
+                                        MaterialPageRoute(
+                                            builder: (context) => HomePage(
+                                                userDetail: userDetail)));
+                                  }
+                                });
                               },
                               style: ElevatedButton.styleFrom(
                                 shape: RoundedRectangleBorder(
@@ -278,13 +290,13 @@ class _signinState extends State<signin> {
                           ),
                           InkWell(
                             onTap: () {
-                              googleSignIn().whenComplete(() async {
-                                User? user = auth.currentUser!;
-                                Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            HomePage(uid: user.uid)));
-                              });
+                              // googleSignIn().whenComplete(() async {
+                              //   User? user = auth.currentUser!;
+                              //   Navigator.of(context).pushReplacement(
+                              //       MaterialPageRoute(
+                              //           builder: (context) =>
+                              //               HomePage(uid: user.uid)));
+                              // });
                             },
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(2.0),

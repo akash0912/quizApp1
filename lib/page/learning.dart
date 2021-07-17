@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/model/loginModel.dart';
 import 'package:flutter_application_2/page/selectprofile.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'first.dart';
 
 class Learning extends StatefulWidget {
-  Learning({Key? key}) : super(key: key);
+  final UserDetail? userDetail;
+
+  Learning({Key? key, this.userDetail}) : super(key: key);
 
   @override
-  _LearningState createState() => _LearningState();
+  _LearningState createState() => _LearningState(userDetail);
 }
 
 class _LearningState extends State<Learning> {
+  final UserDetail? userDetail;
+  _LearningState(this.userDetail);
+
   Widget tiles(Color color) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 7.0, horizontal: 8.0),
@@ -56,6 +62,7 @@ class _LearningState extends State<Learning> {
   }
 
   Widget profileImage() {
+    var profileimgae = userDetail!.avatar;
     return Padding(
       padding: const EdgeInsets.only(top: 4.0, bottom: 0.0, right: 10.0),
       child: ClipRRect(
@@ -63,9 +70,7 @@ class _LearningState extends State<Learning> {
         child: InkWell(
           child: Container(
             color: Colors.white,
-            child: Image(
-              image: AssetImage("asset/profile.png"),
-            ),
+            child: Image.network(profileimgae),
           ),
           onTap: () => pushNewScreen(
             context,
