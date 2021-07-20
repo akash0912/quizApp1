@@ -4,11 +4,11 @@ import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_2/controller/authentication.dart';
+import 'package:flutter_application_2/model/loginModel.dart';
 import 'package:flutter_application_2/page/homepage.dart';
 import 'package:flutter_application_2/page/learning.dart';
 import 'package:flutter_application_2/services/api_manager.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_application_2/services/api_manager.dart';
 
 class signin extends StatefulWidget {
@@ -25,7 +25,7 @@ class _signinState extends State<signin> {
   String email = "";
   String password = "";
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  var userDetail;
+  UserDetail? userDetail;
 
   void signin() {
     if (formKey.currentState!.validate()) {
@@ -240,7 +240,7 @@ class _signinState extends State<signin> {
                                     .login(email, password)
                                     .then((value) {
                                   userDetail = value.userDetails[0];
-                                  print(userDetail.runtimeType);
+                                  print(userDetail!.avatar);
                                   if (value.status == 1) {
                                     Navigator.of(context).pushReplacement(
                                         MaterialPageRoute(

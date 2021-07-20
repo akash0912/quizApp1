@@ -19,9 +19,10 @@ PersistentTabController _controller = PersistentTabController(initialIndex: 0);
 class _HomePageState extends State<HomePage> {
   final UserDetail? userDetail;
   _HomePageState(this.userDetail);
+
   List<Widget> _buildScreens() {
     return [
-      Learning(),
+      Learning(userDetail: userDetail),
       Quiz(),
       LeaderBoard(),
       Settings(),

@@ -3,6 +3,7 @@ import 'package:flutter_application_2/model/loginModel.dart';
 import 'package:flutter_application_2/page/selectprofile.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'first.dart';
+import 'package:flutter_application_2/services/api_manager.dart';
 
 class Learning extends StatefulWidget {
   final UserDetail? userDetail;
@@ -15,7 +16,13 @@ class Learning extends StatefulWidget {
 
 class _LearningState extends State<Learning> {
   final UserDetail? userDetail;
+
   _LearningState(this.userDetail);
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   Widget tiles(Color color) {
     return Padding(
@@ -63,6 +70,7 @@ class _LearningState extends State<Learning> {
 
   Widget profileImage() {
     var profileimgae = userDetail!.avatar;
+    print(userDetail!.avatar);
     return Padding(
       padding: const EdgeInsets.only(top: 4.0, bottom: 0.0, right: 10.0),
       child: ClipRRect(

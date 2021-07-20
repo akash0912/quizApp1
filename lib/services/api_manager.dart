@@ -46,15 +46,14 @@ class APIManager {
         var jsonMap = jsonDecode(jsonString);
 
         loginModel = Userdetails.fromJson(jsonMap);
-        print(jsonString);
+
+        print("This is response");
         print(jsonMap);
       }
     } catch (Exception) {
       print(Exception);
-      return Future.value(null);
+      return loginModel;
     }
     return loginModel;
   }
 }
-
-//{"user_details": [{"id": "26", "username": "BABY", "avatar": "http://sunshinelifestyle.co/api/upload/animal/User_Cartoon_2.png", "device_type": "Android", "score": "218", "fullname": }], "status": 1}

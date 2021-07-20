@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_2/model/avatar.dart';
 import 'package:flutter_application_2/page/homepage.dart';
 import 'package:flutter_application_2/page/learning.dart';
+import 'package:flutter_application_2/page/quiz.dart';
 import 'package:flutter_application_2/services/api_manager.dart';
 import 'package:flutter_application_2/controller/authentication.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -135,7 +136,7 @@ class _SelectProfileState extends State<SelectProfile> {
                 child: ElevatedButton(
                   onPressed: () => selected().whenComplete(() =>
                       Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (context) => Learning()))),
+                          MaterialPageRoute(builder: (context) => Quiz()))),
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0)),
